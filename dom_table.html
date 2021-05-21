@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,td{
+            border: 1px solid red;
+            border-collapse: collapse;
+        }
+        td{
+            width:100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <table>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>4</td>
+        </tr>
+    </table> -->
+    <lable for="row">Number of rows</lable>
+    <input id="row" type="text"/>
+    <br />
+    <br />
+
+    <lable for="col">Number of cols</lable>
+    <input id="col" type="text"/>
+
+    <br/>
+    <button onclick="create_table()">Create Table</button>
+    <br/>
+    <br/>
+    <script>
+        
+        setTimeout(()=>{
+           console.log("call back");
+        },1000)
+        
+        let secs = new Date().getSeconds()
+        console.log("before==",secs);
+
+        while(new Date().getSeconds()<secs+8){
+            // console.log("ckc k")
+
+        }
+
+        console.log("afterr==",typeof Date.now(),new Date().getSeconds())
+
+       
+          function create_table(){
+            var row=document.getElementById('row').value;
+        var col=document.getElementById('col').value;
+        
+        console.log("row==",row);
+        console.log("cols==",col);
+              console.log(" jd")
+              var tble= document.createElement('table');
+             
+             
+              for(let i=0;i<row;i++){
+                var rw = document.createElement('tr');
+                  for(let j=0;j<col;j++){
+                      var cell = document.createElement('td');
+                      if(j%2===0)
+                      cell.innerHTML=(row*j)+(i+1);
+                      else
+                      cell.innerHTML=(row*j)+(row-i);
+                      rw.appendChild(cell);
+                  }
+                 tble.appendChild(rw);
+              }
+              document.body.appendChild(tble);
+              
+          }
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        Throttling is a technique, in which no matter how many times
+        you fire an event, the attached function will be called only once
+        in a given time interval 
+    </p>
+    <button id="bid">throttle</button>
+    <script>
+        let i=0;
+        function networkcall(e){
+            console.log("Network called",i++,e);
+        }
+        const throttleNetworkCall=(fn,delay)=>{
+            let flag=true;
+            return function(...args){
+
+                // flag is true then make the network call
+                if(flag){
+                   const context=this;
+                   fn.apply(context,args);
+                   flag=false;
+                   setTimeout(()=>{
+                   // after delay set flag to true, so that we again can make network call
+                   flag=true;
+                },delay);
+                }
+               
+            }
+        }
+        const a=throttleNetworkCall(networkcall,2000);
+        document.getElementById('bid').addEventListener('click',(e)=>{
+            a(e);
+        })
+    </script>
+</body>
+</html>
